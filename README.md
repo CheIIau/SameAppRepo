@@ -1,6 +1,6 @@
 # SameAppRepo
 
-Made one App using several different frameworks such:
+Made the same app using several different frameworks such as:
 
 - Angular
 - Next
