@@ -1,0 +1,18 @@
+<footer
+    class="fixed bottom-0 flex gap-3 items-center p-2 bg-indigo-800 text-indigo-200 rounded-t-lg left-1/2 -translate-x-1/2"
+>
+    @if(+page > 1 ) {
+    <a
+        class='p-2'
+        [routerLink]="'/posts/'+prevPage"
+    >{{prevPage}}</a>
+    }
+    <a
+        class='p-2 text-amber-600'
+        [routerLink]="'/posts/'+ page"
+    >{{page}}</a>
+    <a
+        class='p-2'
+        [routerLink]="'/posts/'+nextPage"
+    >{{nextPage}}</a>
+</footer>

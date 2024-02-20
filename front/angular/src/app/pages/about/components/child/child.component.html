@@ -1,0 +1,19 @@
+<div class="border-solid border-2 rounded-md border-indigo-600">
+    <p>child works!</p>
+    <p>{{prop}}</p>
+
+    <label for="item-input">Enter text</label>
+    <input
+        type="text"
+        id="item-input"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+        #newItem
+    >
+    <button
+        type="button"
+        (click)="changeString(newItem.value); newItem.value=''"
+        class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-emerald-500 rounded-lg hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800"
+    >
+        Change in parent
+    </button>
+</div>

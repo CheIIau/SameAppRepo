@@ -1,0 +1,18 @@
+<form
+    [formGroup]="todoForm"
+    (ngSubmit)="onSubmit($event)"
+    class="flex justify-between gap-3 w-full"
+>
+    <app-other-input
+        class="w-full"
+        formControlName="text"
+    >
+    </app-other-input>
+    <button
+        [disabled]="!todoForm.valid"
+        type="submit"
+        [ngClass]="{'inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none': true, 'bg-green-500 hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800': todoForm.valid, 'bg-green-300 hover:bg-green-500 focus:ring-green-100 dark:bg-green-300 dark:hover:bg-green-400 dark:focus:ring-green-500': !todoForm.valid}"
+    >
+        Add
+    </button>
+</form>

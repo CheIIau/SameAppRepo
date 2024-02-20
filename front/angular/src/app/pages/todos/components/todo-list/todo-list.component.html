@@ -1,0 +1,9 @@
+<ul [class]="'flex flex-col flex-grow gap-2 ' + className">
+    @for (todo of todos; track todo.id) {
+    <app-todo-item
+        [todo]="todo"
+        (deleteTodo)="onDeleteTodo($event)"
+        (saveTodo)="onSaveTodo($event)"
+    ></app-todo-item>
+    }
+</ul>

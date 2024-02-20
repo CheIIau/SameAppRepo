@@ -1,0 +1,13 @@
+<p>about works!</p>
+<p>{{otherProperty}}</p>
+<app-child
+    [prop]="property"
+    (newStringEvent)="setOtherPropety($event)"
+></app-child>
+
+<a
+    routerLink="second"
+    class="link"
+>
+    about2
+</a>

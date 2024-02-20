@@ -1,0 +1,15 @@
+<div class="flex-grow flex justify-center items-center">
+    @if (post) {
+    <div class="flex justify-center item h-full">
+        <app-post-item [post]="post"></app-post-item>
+    </div>
+
+    } @else if (loading) {
+    <app-spinner size="120px"></app-spinner>
+    } @else {
+    <p>Whoopsie. No post :(</p>
+    @if (error) {
+    <p>Reason: {{error}}</p>
+    }
+    }
+</div>

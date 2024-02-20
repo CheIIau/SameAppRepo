@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.svg {
+    width: 2em;
+    height: 3em;
+    display: block;
+}
+
+.link {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 0.5rem;
+    color: #e2e3ffa9;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: color 0.2s linear;
+}
+
+.link:hover {
+    color: #7fc1ff
+}

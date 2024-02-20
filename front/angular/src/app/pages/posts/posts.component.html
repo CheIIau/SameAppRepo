@@ -1,0 +1,23 @@
+<div class="flex-grow">
+    @if (loading) {
+    <div class="flex justify-center item h-full w-full flex-grow">
+        <app-spinner size="120px"></app-spinner>
+    </div>
+    }
+    @else if (posts) {
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
+        @for (post of posts; track post.id) {
+        <div class="flex justify-center item h-full">
+            <app-post-item [post]="post" />
+        </div>
+        }
+    </div>
+    } @else {
+    <p>Whoopsie. No post :(</p>
+    @if (error) {
+    <p>Reason: {{error}}</p>
+    }
+    }
+
+</div>
+<app-posts-footer></app-posts-footer>

@@ -1,0 +1,36 @@
+<div>
+    <p>{{ word | uppercase }} works!</p>
+    <button (click)="changeWord($event)">change</button>
+</div>
+
+<input
+    type="text"
+    [value]="word"
+    (input)="typeWord($event)"
+    appChangeValue
+/>
+
+<p>
+    {{phrase()}}
+</p>
+
+<div *ngIf="show; else elseBlock">
+    Content to render when condition is true.
+</div>
+<ng-template #elseBlock>
+    <div>
+        Content to render when condition is false.
+    </div>
+</ng-template>
+
+<button
+    class="bg-purple-500 rounded-md"
+    (click)="show = !show"
+>change</button>
+
+<div>
+    <button
+        class="bg-orange-400 rounded-md"
+        (click)="back()"
+    >go back</button>
+</div>

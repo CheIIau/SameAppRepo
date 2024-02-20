@@ -1,0 +1,9 @@
+<div class="w-1/2 mt-3 mx-auto">
+    <app-todo-form (addTodo)="addTodo($event)"></app-todo-form>
+    <app-todo-list
+        class="mt-3"
+        [todos]="todos"
+        (deleteTodo)="deleteTodo($event)"
+        (saveTodo)="saveTodo($event)"
+    ></app-todo-list>
+</div>
