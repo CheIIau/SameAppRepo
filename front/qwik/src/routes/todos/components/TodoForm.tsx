@@ -6,10 +6,11 @@ import {
     GetValidatorType,
 } from "@builder.io/qwik-city";
 import Input from "~/components/Input/Input";
-import { Todo } from "~/types/todos";
+import type { Todo } from "~/types/todos";
+import type { useAddTodoType } from "..";
 
 interface TodoFormProps {
-    readonly addTodo: ActionStore<{}, Record<string, unknown>, true>;
+    readonly addTodo: useAddTodoType;
 }
 
 // 2 типа из zod, которые не могу достать
@@ -29,10 +30,6 @@ export default component$(({ addTodo }: TodoFormProps) => {
         todoText.value = text;
     });
 
-    const clearText = $(() => {
-        todoText.value = "";
-    });
-
     const addTodoValue = addTodo.value as undefined | Todo | ZodValidationError;
 
     let zodError = "";
@@ -48,7 +45,7 @@ export default component$(({ addTodo }: TodoFormProps) => {
             <Form
                 class="flex justify-between gap-3"
                 action={addTodo}
-                onSubmitCompleted$={clearText}
+                spaReset
             >
                 <Input
                     value={todoText.value}
@@ -59,7 +56,6 @@ export default component$(({ addTodo }: TodoFormProps) => {
                 <button
                     disabled={addTodo.isRunning}
                     type="submit"
-                    onClick$={() => setTodoText("")}
                     class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
                     {addTodo.isRunning ? "Loading" : "Add"}

@@ -37,6 +37,8 @@ export const useAddTodo = routeAction$(
     })
 );
 
+export type useAddTodoType =  ReturnType<typeof useAddTodo>
+
 export const useEditTodo = routeAction$(
     //@ts-expect-error
     async (data: { id: string; text: string }, requestEvent) => {

@@ -39,6 +39,7 @@ export const useServerTimeLoader = routeLoader$(() => {
 
 export default component$(() => {
     useStyles$(styles);
+    // не помню почему вынес методы отдельно, можно было засунуть в стору
     const cart = useStore<Record<string, { number: number; price: number }>>(
         {}
     );
