@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
-import { Form, useLoaderData, useNavigation, useSubmit } from '@remix-run/react'
+import { Form, useLoaderData, useNavigation, useSubmit , isRouteErrorResponse, useRouteError } from '@remix-run/react'
 import { getTodos, addTodo, deleteTodo, editTodo } from '~/api/todos'
 import { TodoList } from './components/TodoList'
 import { Input } from '~/components/UI/Input/Input'
@@ -8,7 +8,6 @@ import { Spinner } from '~/components/UI/Spinner/Spinner'
 
 export const loader = async (_args: LoaderFunctionArgs) => {
     const todos = await getTodos()
-
     // Return the data as JSON
     return json({ todos })
 }
@@ -60,6 +59,7 @@ export default function Todos() {
         }
 
         submit({ text: todoText, timestamp: Date.now() }, { method: 'post' })
+        setTodoText('')
     }
 
     const editTodo = (id: string, text: string) => {
@@ -102,4 +102,31 @@ export default function Todos() {
             )}
         </div>
     )
+}
+
+export function ErrorBoundary() {
+    const error = useRouteError()
+    if (isRouteErrorResponse(error)) {
+        return (
+            <div>
+                <h1>Whoopsie.</h1>
+                <br />
+                <h2>
+                    {error.status} {error.statusText}
+                </h2>
+                <p>{error.data}</p>
+            </div>
+        )
+    } else if (error instanceof Error) {
+        return (
+            <div>
+                <h1>Error</h1>
+                <p>{error.message}</p>
+                <p>The stack trace is:</p>
+                <pre>{error.stack}</pre>
+            </div>
+        )
+    } else {
+        return <h1>Unknown Error</h1>
+    }
 }

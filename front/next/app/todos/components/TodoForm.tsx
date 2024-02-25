@@ -17,6 +17,7 @@ const TodoForm: FC<TodoFormProps> = ({ addTodo }) => {
         const timestamp = Date.now();
         formData.append("timestamp", String(timestamp));
         addTodo(formData);
+        setTodoText('')
     };
 
     return (
