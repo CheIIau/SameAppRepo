@@ -12,7 +12,7 @@ import style from './Posts.css?inline'
 @customElement('posts-page')
 export class Posts extends TailwindElement(style) {
     @property({ type: Array })
-    posts = [] as Post[]
+    posts: Post[] = []
 
     @property()
     currentPage?: string

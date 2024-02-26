@@ -1,0 +1,14 @@
+spinner-component {
+    --color: #f87171;
+    --size: 130px;
+    --containerSize: 146px;
+    --width: 7px;
+}
+
+:host {
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}

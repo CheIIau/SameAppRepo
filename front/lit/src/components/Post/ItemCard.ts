@@ -7,7 +7,10 @@ import store from '../../store/store'
 
 @customElement('item-card')
 export class ItemCard extends TailwindElement() {
+    @property({ type: Object })
     declare post: Post
+
+    @property({ type: Boolean })
     declare showFooter: boolean
     private bindState = new StateController(this, store)
 
