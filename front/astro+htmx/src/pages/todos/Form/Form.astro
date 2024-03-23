@@ -1,0 +1,29 @@
+---
+import Input from '../../../components/UI/Input/Input.astro'
+export const prerender = false
+---
+<!-- тут alpine просто чтобы задавать пустую строку перед запросом -->
+<form
+    class="flex justify-between gap-3"
+    hx-post="/partials/todos"
+    hx-target="#todo-list"
+    hx-swap="beforeend"
+    x-data="{ todoText: '' }"
+    @htmx:before-request="todoText = ''"
+>
+    <Input
+        x-model="todoText"
+        type="text"
+        name="todoText"
+        id="txtTodo"
+        autofocus
+        placeholder="What needs to be done?"
+    />
+    <button
+        id="add-button"
+        type="submit"
+        class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+    >
+        Add
+    </button>
+</form>

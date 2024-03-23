@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/MainLayout.astro'
+---
+
+<Layout title="About">
+    <div id="parent-div">Target here</div>
+    <button
+        hx-post="/partials/clicked/"
+        hx-trigger="click"
+        hx-target="#parent-div"
+        hx-swap="innerHTML"
+    >
+        Click Me!
+    </button>
+</Layout>

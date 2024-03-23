@@ -1,0 +1,36 @@
+---
+import { getPostsByPage } from '../../api/posts'
+import Layout from '../../layouts/MainLayout.astro'
+import type { Post } from '../../types/posts'
+import PostsFooter from './components/PostsFooter/PostsFooter.astro'
+import ItemCard from './components/ItemCard/ItemCard.astro'
+
+export const prerender = false
+const { page } = Astro.params
+if (!page) {
+    return Astro.redirect(null, 404)
+}
+const posts = await getPostsByPage(page)
+if (posts.errors) {
+    console.log(posts.errors)
+    return Astro.redirect(null, 500)
+}
+---
+
+<Layout title="Posts">
+    <div class="flex-grow">
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
+            {
+                (posts as Post[]).map((post) => (
+                    <div class="flex justify-center item h-full">
+                        <ItemCard
+                            showFooter
+                            post={post}
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+    <PostsFooter />
+</Layout>

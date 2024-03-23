@@ -1,0 +1,73 @@
+---
+import { type Todo } from '../../../types/todos'
+interface Props {
+    todo: Todo
+}
+const { todo } = Astro.props
+---
+
+<li
+    id={`todo-${todo.id}`}
+    class="px-3 py-2 rounded-lg border-2"
+    x-data=`{todoText: "${todo.text}", disabled: true}`
+>
+    <form class="flex items-center justify-between">
+        <input
+            type="text"
+            name="todoText"
+            x-model="todoText"
+            :disabled="disabled"
+            class="text-sm font-medium"
+            id={`todo-${todo.id}-input`}
+        />
+        <div class="flex gap-2">
+            <button
+                type="button"
+                x-show="disabled"
+                @click="disabled = !disabled"
+                class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-emerald-500 rounded-lg hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800"
+            >
+                Edit
+            </button>
+            <div x-show="!disabled">
+                <button
+                    type="button"
+                    hx-patch={`/partials/todos/${todo.id}`}
+                    hx-target={`#todo-${todo.id}`}
+                    hx-swap="outerHTML"
+                    class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-emerald-500 rounded-lg hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800"
+                >
+                    Save <span class="htmx-indicator">&nbsp;...</span>
+                </button>
+                <button
+                    type="button"
+                    @click=`todoText="${todo.text}"; disabled=!disabled`
+                    class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-amber-500 rounded-lg hover:bg-amber-800 focus:ring-4 focus:outline-none focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800"
+                >
+                    Stash
+                </button>
+            </div>
+            <button
+                hx-delete={`/partials/todos/${todo.id}`}
+                hx-swap="delete"
+                hx-target={`#todo-${todo.id}`}
+                class="inline-flex justify-center items-center p-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+            >
+                Delete
+            </button>
+        </div>
+    </form>
+</li>
+
+<style>
+    .htmx-indicator {
+        color: blue;
+        display: none;
+    }
+    .htmx-request .htmx-indicator {
+        display: inline;
+    }
+    .htmx-request.htmx-indicator {
+        display: inline;
+    }
+</style>

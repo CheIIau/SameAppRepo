@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/MainLayout.astro'
+import TodoList from './TodoList/TodoList.astro'
+import { addTodo, getTodos, editTodo, deleteTodo } from '../../api/todos'
+import Form from './Form/Form.astro'
+import type { Todo } from '../../types/todos'
+export const prerender = false
+
+let todos: Todo[]
+
+try {
+    todos = await getTodos()
+} catch (error) {
+    todos = []
+}
+---
+
+<Layout title="Todos">
+    <div class="w-1/2 mt-3 mx-auto">
+        <Form />
+        
+        <TodoList
+            todos={todos}
+            className="mt-3"
+        />
+    </div>
+</Layout>

@@ -1,0 +1,20 @@
+---
+import TodoItem from '../../todos/TodoItem/TodoItem.astro'
+import { addTodo } from '../../../api/todos'
+
+export const prerender = false
+export const partial = true
+
+if (Astro.request.method !== 'POST') {
+    return Astro.redirect(null, 404)
+}
+
+const data = await Astro.request.formData()
+const name = data.get('todoText') as string
+if (!name) {
+    return new Response('"todo" is required', { status: 400 })
+}
+const newTodo = await addTodo({ text: name, timestamp: Date.now() })
+---
+
+<TodoItem todo={newTodo} />

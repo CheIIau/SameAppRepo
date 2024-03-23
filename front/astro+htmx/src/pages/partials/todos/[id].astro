@@ -1,0 +1,28 @@
+---
+import { deleteTodo, editTodo } from '../../../api/todos'
+import { Todo } from '../../../types/todos'
+import TodoItem from '../../todos/TodoItem/TodoItem.astro'
+
+export const partial = true
+export const prerender = false
+
+// в методе delete можно было так передать айдишник
+// hx-vals={`js:{ id: ${todo.id} }`}
+// const data = await Astro.request.formData()
+// const id = data.get('id') as string
+const { id } = Astro.params as { id: string }
+
+let todo: Todo
+
+if (Astro.request.method === 'DELETE') {
+    deleteTodo(id)
+} else if (Astro.request.method === 'PATCH') {
+    const data = await Astro.request.formData()
+    const text = data.get('todoText') as string
+    todo = await editTodo({ id, text })
+} else {
+    return Astro.redirect(null, 404)
+}
+---
+
+{Astro.request.method === 'PATCH' && todo && <TodoItem todo={todo} />}

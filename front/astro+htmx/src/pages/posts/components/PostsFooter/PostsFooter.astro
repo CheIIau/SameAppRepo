@@ -1,0 +1,31 @@
+---
+export const prerender = false
+const { page } = Astro.params
+const prevPage = page ? +page - 1 : 1
+const nextPage = page ? +page + 1 : 2
+---
+
+<footer
+    class="fixed bottom-0 flex gap-3 items-center p-2 bg-indigo-800 text-indigo-200 rounded-t-lg left-1/2 -translate-x-1/2"
+>
+    {
+        +page! > 1 && (
+            <a
+                class="p-2"
+                href={`/posts/${prevPage}`}
+            >
+                {prevPage}
+            </a>
+        )
+    }
+    <a
+        class="p-2 text-amber-600"
+        href={`/posts/${page}`}
+        >{page}</a
+    >
+    <a
+        class="p-2"
+        href={`/posts/${nextPage}`}
+        >{nextPage}</a
+    >
+</footer>
